@@ -8,6 +8,8 @@ import { BrowserRouter , Route } from "react-router-dom";
 function App() {
 
   const [contacts, setContacts] = useState([]);
+  
+  // TODO: Implementar ID nos contatos
   /* IDEIA 
       Fazer uns state para o path do pagina
   */

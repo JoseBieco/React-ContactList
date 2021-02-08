@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Contact from "../Contact";
 import TableNav from "./TableNav";
 
 const ContactTable = ({ contacts, setContacts }) => {
+
+
     return(
         <table>
             <thead>
@@ -20,7 +22,10 @@ const ContactTable = ({ contacts, setContacts }) => {
                         <Contact 
                             pName={contact.name} 
                             pPhone={contact.phone} 
-                            key={(contact.name, contact.phone)}
+                            checked={contact.checked}
+                            key={contact.name}
+                            contacts={contacts}
+                            setContacts={setContacts}
                         />
                     );
                 })}
