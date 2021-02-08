@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Contact from "../Contact";
 import TableNav from "./TableNav";
 
@@ -9,7 +9,10 @@ const ContactTable = ({ contacts, setContacts }) => {
         <table>
             <thead>
                 <div className="table-nav-menu">
-                    <TableNav contacts={contacts}/>
+                    <TableNav 
+                        contacts={contacts}
+                        setContacts={setContacts}
+                    />
                 </div>
                 <tr>
                     <th scope="col">Name</th>

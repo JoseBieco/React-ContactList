@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
-import Contact from "./components/contact/Conatact";
+import Contact from "./components/contact/Contact";
 import ContactList from "./components/contactList/ContactList";
 import { BrowserRouter , Route } from "react-router-dom";
 
