@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import FormTextInput from "./FormTextInput";
+
 
 const Form = ({ contacts, setContacts }) => {
+//HOC -> Transform to
 
     const [inputName, setInputName] = useState("");
     const [inputPhone, setInputPhone] = useState("");
 
     const history = useHistory();
 
+    // Editing
+    const editContact = contacts.filter((contact) => contact.editing === true)[0];
+    var isEditing = false;
+
+    //var isEditing = editContact !== undefined;
+
+    if(editContact !== undefined){
+        isEditing = true;
+    }
+
     const formHandler = (e) => {
         e.preventDefault();
-    };
-
-    const nameHandler = (e) => {
-        setInputName(e.target.value);
-    };
-
-    const phoneHandler = (e) => {
-        setInputPhone(e.target.value);
     };
 
     const exitHandler = () => {
@@ -26,17 +31,29 @@ const Form = ({ contacts, setContacts }) => {
         changePage("/");
     }
 
-    // Fazer um aqrquivo Util.js com func generalizadas
     function changePage(path){
         history.push(path);
     }
 
+    const submitEditHandler = () => {
+        setContacts(contacts.map((contact) => {
+            if(contact.name === editContact.name){
+                isEditing = false;
+                return {
+                    ...contact, 
+                    name: inputName === "" ? editContact.name: inputName, 
+                    phone: inputPhone === "" ? editContact.phone : inputPhone, editing: false
+                }
+            }
+            return contact;
+        }));
+    };
+
     const submitHandler = () => {
         setContacts([
             ...contacts,
-            {name: inputName, phone: inputPhone, checked: false},
+            {name: inputName, phone: inputPhone, checked: false, editing: false},
         ]);
-        //changePage("/");
     };
 
     useEffect(() => {
@@ -44,10 +61,19 @@ const Form = ({ contacts, setContacts }) => {
         setInputPhone("");
     },[contacts]);
 
+
     return(
         <form onSubmit={formHandler} className="form">
             <div className="inputs">
-                <div className="input-name">
+               <FormTextInput 
+                    setInputName={setInputName} 
+                    setInputPhone={setInputPhone} 
+                    inputName={inputName} 
+                    inputPhone={inputPhone}
+                    pName={isEditing === true ? editContact.name : inputName}
+                    pPhone={isEditing === true ? editContact.phone : inputPhone}
+                />
+                {/* <div className="input-name">
                     <input 
                         type="text" 
                         className="input" 
@@ -65,13 +91,13 @@ const Form = ({ contacts, setContacts }) => {
                         value={inputPhone}
                         onChange={phoneHandler}
                     />
-                </div>
+                </div> */}
 
                 <div className="input-submit">
                     <button 
                         type="submit" 
                         className="submit-btn"
-                        onClick={submitHandler}    
+                        onClick={isEditing ? submitEditHandler : submitHandler}  
                     >Save</button>
                 </div>
 
@@ -82,6 +108,7 @@ const Form = ({ contacts, setContacts }) => {
                         onClick={exitHandler}
                     >Exit</button>
                 </div>
+
             </div>
         </form>
     );
