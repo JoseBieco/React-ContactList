@@ -5,6 +5,7 @@ import FormTextInput from "./FormTextInput";
 
 const Form = ({ contacts, setContacts }) => {
 //HOC -> Transform to
+// Não tenho ideia de oq fazer
 
     const [inputName, setInputName] = useState("");
     const [inputPhone, setInputPhone] = useState("");
@@ -73,25 +74,6 @@ const Form = ({ contacts, setContacts }) => {
                     pName={isEditing === true ? editContact.name : inputName}
                     pPhone={isEditing === true ? editContact.phone : inputPhone}
                 />
-                {/* <div className="input-name">
-                    <input 
-                        type="text" 
-                        className="input" 
-                        placeholder="Name"
-                        value={inputName}
-                        onChange={nameHandler}
-                    />
-                </div>
-
-                <div className="input-phone">
-                    <input 
-                        type="text" 
-                        className="input" 
-                        placeholder="Telephone"
-                        value={inputPhone}
-                        onChange={phoneHandler}
-                    />
-                </div> */}
 
                 <div className="input-submit">
                     <button 

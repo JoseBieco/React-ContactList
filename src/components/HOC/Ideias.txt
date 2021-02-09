@@ -1,0 +1,15 @@
+Para fazer um HOC nesse projeto, pensei na ideia de:
+    O component q seria meu HOC, irá ter a função de ler dados, por exemplo, consumir
+    de uma API e repassar para os componentes q utilizam dessa informação.
+
+    Exemplo:
+        Ler os contatos já salvos, de um banco, JSON, ...
+        Ai, no momento em que o App fosse renderizado, ele passaria por esse HOC primeiro
+            { export default ComponentHOC(App); } -> ai o App iria receber os states desse ComponentHOC,
+        q seraia { state = {
+            contacts = [],
+        }} -> com isso, nao teria de ter uma função só para ler os dados dentro do App.
+
+        Ou, ainda mais, no principal component q seria o ContactList, ele passar por esse ComponentHOC
+        {export default ComponentHOC(ContactList)}, já que uma de suas props são os contatos, não teria de 
+        vir do App essa informação.
