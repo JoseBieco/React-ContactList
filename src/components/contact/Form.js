@@ -4,8 +4,7 @@ import FormTextInput from "./FormTextInput";
 
 
 const Form = ({ contacts, setContacts }) => {
-//HOC -> Transform to
-// Não tenho ideia de oq fazer
+//HOC
 
     const [inputName, setInputName] = useState("");
     const [inputPhone, setInputPhone] = useState("");
@@ -43,11 +42,13 @@ const Form = ({ contacts, setContacts }) => {
                 return {
                     ...contact, 
                     name: inputName === "" ? editContact.name: inputName, 
-                    phone: inputPhone === "" ? editContact.phone : inputPhone, editing: false
+                    phone: inputPhone === "" ? editContact.phone : inputPhone, checked: false ,editing: false
                 }
             }
             return contact;
         }));
+
+        changePage("/");
     };
 
     const submitHandler = () => {

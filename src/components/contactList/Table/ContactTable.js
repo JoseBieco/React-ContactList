@@ -2,18 +2,17 @@ import React from "react";
 import Contact from "../Contact";
 import TableNav from "./TableNav";
 
+
 const ContactTable = ({ contacts, setContacts }) => {
 
 
     return(
         <table>
             <thead>
-                <div className="table-nav-menu">
-                    <TableNav 
-                        contacts={contacts}
-                        setContacts={setContacts}
-                    />
-                </div>
+                <TableNav 
+                    contacts={contacts}
+                    setContacts={setContacts}
+                />
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Telephone</th>

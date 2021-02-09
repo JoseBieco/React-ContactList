@@ -40,13 +40,13 @@ const TableNav = ({ contacts, setContacts }) => {
     }
 
     return(
-        <div className="table-nav">
-            <tr>
-                <th scope="row"><button onClick={newContactHandler}>New Contact</button></th>
-                <th scope="row"><button onClick={editHandle}>Edit Contact</button></th>
-                <th scope="row"><button onClick={deletHandler}>Delet Contact</button></th>
-            </tr>
-        </div>
+        
+        <tr>
+            <th scope="row"><button onClick={newContactHandler}>New Contact</button></th>
+            <th scope="row"><button onClick={editHandle}>Edit Contact</button></th>
+            <th scope="row"><button onClick={deletHandler}>Delet Contact</button></th>
+        </tr>
+        
     )
 }
 
