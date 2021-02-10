@@ -1,10 +1,13 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 
 
-const TableNav = ({ contacts, setContacts }) => {
+const TableNav = () => {
 
+    const dispatch = useDispatch();
     const history = useHistory();
+    const contacts = useSelector(state => state.contacts);
 
     function changePage(path){
         history.push(path);
@@ -15,7 +18,18 @@ const TableNav = ({ contacts, setContacts }) => {
     }
 
     const deletHandler = () => {
-        setContacts(contacts.filter((contact) => contact.checked === false))
+       const delContacts = contacts.filter((contact) => contact.checked === false)
+        
+        delContacts.map(delContact => {
+            dispatch({
+                type: "DELETE",
+                payload: {
+                    id: delContact.id
+            }});
+
+            return null;
+        });
+        
     }
 
     const editHandle = () => {
@@ -23,18 +37,14 @@ const TableNav = ({ contacts, setContacts }) => {
 
        if(list.length > 1){
            alert("You can just edit one contact!");
-           //TODO: Crate POP-UP
        }else if(list.length === 0){
             alert("No contact selected");
        }else{
-           setContacts(contacts.map((contact) => {
-               if(contact.checked === true){
-                   return {
-                       ...contact, editing: true
-                   }
-               }
-               return contact;
-           }))
+           dispatch({
+                type: "SET",
+                payload: list[0]
+            });
+
            changePage("/contact");
        }
     }
@@ -44,7 +54,7 @@ const TableNav = ({ contacts, setContacts }) => {
         <tr>
             <th scope="row"><button onClick={newContactHandler}>New Contact</button></th>
             <th scope="row"><button onClick={editHandle}>Edit Contact</button></th>
-            <th scope="row"><button onClick={deletHandler}>Delet Contact</button></th>
+            <th scope="row"><button onClick={deletHandler}>Delete Contact</button></th>
         </tr>
         
     )

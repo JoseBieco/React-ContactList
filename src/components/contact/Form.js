@@ -1,33 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import FormTextInput from "./FormTextInput";
+import { useSelector ,useDispatch } from "react-redux";
 
 
-const Form = ({ contacts, setContacts }) => {
-//HOC
-
-    const [inputName, setInputName] = useState("");
-    const [inputPhone, setInputPhone] = useState("");
+const Form = () => {
+    const dispatch = useDispatch();
+    const contacts = useSelector(state => state.contacts);
+    const editing = useSelector(state => state.form);
 
     const history = useHistory();
 
-    // Editing
-    const editContact = contacts.filter((contact) => contact.editing === true)[0];
-    var isEditing = false;
-
-    //var isEditing = editContact !== undefined;
-
-    if(editContact !== undefined){
-        isEditing = true;
-    }
 
     const formHandler = (e) => {
         e.preventDefault();
     };
 
     const exitHandler = () => {
-        setInputName("");
-        setInputPhone("");
+        dispatch({
+            type: "SET",
+            payload: {
+            name: "",
+            phone: "",
+            editing: false
+        }});
         changePage("/");
     }
 
@@ -35,52 +31,42 @@ const Form = ({ contacts, setContacts }) => {
         history.push(path);
     }
 
-    const submitEditHandler = () => {
-        setContacts(contacts.map((contact) => {
-            if(contact.name === editContact.name){
-                isEditing = false;
-                return {
-                    ...contact, 
-                    name: inputName === "" ? editContact.name: inputName, 
-                    phone: inputPhone === "" ? editContact.phone : inputPhone, checked: false ,editing: false
-                }
-            }
-            return contact;
-        }));
+    const submitEditHandler = () => { 
 
         changePage("/");
     };
 
     const submitHandler = () => {
-        setContacts([
-            ...contacts,
-            {name: inputName, phone: inputPhone, checked: false, editing: false},
-        ]);
+        dispatch({
+            type: "CREATE",
+            payload: {
+            name: "Jose",
+            phone: "996363488",
+        }});
+
+        dispatch({
+            type: "SET",
+            payload: {
+            name: "",
+            phone: "",
+            editing: false
+        }});
+        
     };
-
-    useEffect(() => {
-        setInputName("");
-        setInputPhone("");
-    },[contacts]);
-
-
+    
     return(
         <form onSubmit={formHandler} className="form">
             <div className="inputs">
-               <FormTextInput 
-                    setInputName={setInputName} 
-                    setInputPhone={setInputPhone} 
-                    inputName={inputName} 
-                    inputPhone={inputPhone}
-                    pName={isEditing === true ? editContact.name : inputName}
-                    pPhone={isEditing === true ? editContact.phone : inputPhone}
+               <FormTextInput  
+                    inputName={editing.name} 
+                    inputPhone={editing.phone}
                 />
 
                 <div className="input-submit">
                     <button 
                         type="submit" 
                         className="submit-btn"
-                        onClick={isEditing ? submitEditHandler : submitHandler}  
+                        onClick={submitHandler}  
                     >Save</button>
                 </div>
 

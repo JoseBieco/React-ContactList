@@ -3,12 +3,12 @@ import Header from "../Header";
 import ContactTable from "./Table/ContactTable";
 
 
-const ContactList = ({ pageName, contacts, setContacts }) => {
+const ContactList = ({ pageName }) => {
 
     return(
         <div className="conatactList">
             <Header pageName={pageName} /> 
-            <ContactTable contacts={contacts} setContacts={setContacts}/>
+            <ContactTable />
         </div>
     )
 }

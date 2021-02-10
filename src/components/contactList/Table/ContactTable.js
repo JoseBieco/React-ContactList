@@ -2,17 +2,17 @@ import React from "react";
 import Contact from "../Contact";
 import TableNav from "./TableNav";
 
+import { useSelector } from "react-redux";
 
-const ContactTable = ({ contacts, setContacts }) => {
 
+const ContactTable = () => {
+
+    const contacts = useSelector(state => state.contacts);
 
     return(
         <table>
             <thead>
-                <TableNav 
-                    contacts={contacts}
-                    setContacts={setContacts}
-                />
+                <TableNav />
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Telephone</th>
@@ -22,12 +22,8 @@ const ContactTable = ({ contacts, setContacts }) => {
                 {contacts.map((contact) => {
                     return(
                         <Contact 
-                            pName={contact.name} 
-                            pPhone={contact.phone} 
-                            checked={contact.checked}
-                            key={contact.name}
-                            contacts={contacts}
-                            setContacts={setContacts}
+                            key={contact.id}
+                            contactId={contact.id}
                         />
                     );
                 })}

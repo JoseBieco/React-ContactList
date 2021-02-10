@@ -1,12 +1,19 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-const Contact = ({ pName, pPhone, checked, contacts, setContacts }) => {
+const Contact = ( props ) => {
+
+    const contacts = useSelector(state => state.contacts);
+    const dispatch = useDispatch();
+
+    const thisConatact = contacts.filter(contact => contact.id === props.contactId)[0];
 
     const checkedHandle = () => {
-        setContacts(contacts.map((contact) => {
-            if(contact.name === pName){
+        dispatch(contacts.map((contact) => {
+            if(contact.id === props.contactId){
                 return {
-                    ...contact, checked: !contact.checked
+                    type: "EDIT_MARCKED",
+                    payload: thisConatact
                 }
             }
             return contact;
@@ -16,10 +23,10 @@ const Contact = ({ pName, pPhone, checked, contacts, setContacts }) => {
     return(
         <tr>
             <td>
-                <input type="checkbox" checked={checked} onChange={checkedHandle} />
+                <input type="checkbox" checked={thisConatact.checked} onChange={checkedHandle} />
             </td>
-            <td className="label name">{pName}</td>
-            <td className="label phone">{pPhone}</td>
+            <td className="label name">{thisConatact.name}</td>
+            <td className="label phone">{thisConatact.phone}</td>
         </tr>
     )
 }

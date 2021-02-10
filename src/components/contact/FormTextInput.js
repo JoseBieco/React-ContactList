@@ -1,13 +1,30 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-const FormTextInput = ( {setInputName, setInputPhone, inputName, inputPhone, pName, pPhone } ) => {
+const FormTextInput = ( { inputName, inputPhone } ) => {
+
+    const dispatch = useDispatch(state => state.form);
 
     const nameHandler = (e) => {
-        setInputName(e.target.value);
+        // setInputName(e.target.value);
+        dispatch({
+            type: "SET",
+            payload: {
+            name: e.target.value,
+            phone: inputPhone,
+            editing: false
+        }});
     };
 
     const phoneHandler = (e) => {
-        setInputPhone(e.target.value);
+        // setInputPhone(e.target.value);
+        dispatch({
+            type: "SET",
+            payload: {
+            name: inputName,
+            phone: e.target.value,
+            editing: false
+        }});
     };
 
     return(
@@ -17,7 +34,7 @@ const FormTextInput = ( {setInputName, setInputPhone, inputName, inputPhone, pNa
                     type="text" 
                     className="input" 
                     placeholder="Name"
-                    value={inputName === "" ? pName : inputName}
+                    value={inputName}
                     onChange={nameHandler}
                 />
             </div>
@@ -27,7 +44,7 @@ const FormTextInput = ( {setInputName, setInputPhone, inputName, inputPhone, pNa
                     type="text" 
                     className="input" 
                     placeholder="Telephone"
-                    value={inputPhone === "" ? pPhone : inputPhone}
+                    value={inputPhone}
                     onChange={phoneHandler}
                 />
             </div>
