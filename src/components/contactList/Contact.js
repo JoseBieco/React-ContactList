@@ -12,7 +12,7 @@ const Contact = ( props ) => {
         dispatch(contacts.map((contact) => {
             if(contact.id === props.contactId){
                 return {
-                    type: "EDIT_MARCKED",
+                    type: "EDIT",
                     payload: thisConatact
                 }
             }

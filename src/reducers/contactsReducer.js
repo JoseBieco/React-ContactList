@@ -10,13 +10,31 @@ const contactsReducer = (state = [], action) => {
                     id: ++lastId,
                     name: action.payload.name,
                     phone: action.payload.phone,
-                    marked: false,
+                    marcked: false,
                     editing: false
                 }
             ];
 
+        case "EDIT":
+            state.map(contact => {
+                if(contact.id === action.payload.id){
+                    return [
+                        {
+                            id: action.payload.id,
+                            name: action.payload.name,
+                            phone: action.payload.phone,
+                            marcked: !action.payload.marcked,
+                            editing: action.payload.edit
+                        }
+                    ]
+                }
+                return contact
+            })
+            break;
+
+
         case "DELETE":
-            return state.filter(contact => contact.id !== action.payload.id);
+            return [state.filter(contact => contact.id !== action.payload.id)];
 
         default:
             return state;

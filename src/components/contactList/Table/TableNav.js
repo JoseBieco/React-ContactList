@@ -18,7 +18,7 @@ const TableNav = () => {
     }
 
     const deletHandler = () => {
-       const delContacts = contacts.filter((contact) => contact.checked === false)
+       const delContacts = contacts.filter((contact) => contact.checked !== false)
         
         delContacts.map(delContact => {
             dispatch({

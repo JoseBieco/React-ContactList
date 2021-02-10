@@ -7,7 +7,7 @@ import { useSelector ,useDispatch } from "react-redux";
 const Form = () => {
     const dispatch = useDispatch();
     const contacts = useSelector(state => state.contacts);
-    const editing = useSelector(state => state.form);
+    const form = useSelector(state => state.form);
 
     const history = useHistory();
 
@@ -40,8 +40,8 @@ const Form = () => {
         dispatch({
             type: "CREATE",
             payload: {
-            name: "Jose",
-            phone: "996363488",
+            name: form.name,
+            phone: form.phone,
         }});
 
         dispatch({
@@ -58,8 +58,8 @@ const Form = () => {
         <form onSubmit={formHandler} className="form">
             <div className="inputs">
                <FormTextInput  
-                    inputName={editing.name} 
-                    inputPhone={editing.phone}
+                    inputName={form.name} 
+                    inputPhone={form.phone}
                 />
 
                 <div className="input-submit">
