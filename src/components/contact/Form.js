@@ -6,8 +6,8 @@ import { useSelector ,useDispatch } from "react-redux";
 
 const Form = () => {
     const dispatch = useDispatch();
-    const contacts = useSelector(state => state.contacts);
     const form = useSelector(state => state.form);
+    const contacts = useSelector(state => state.contacts);
 
     const history = useHistory();
 
@@ -20,37 +20,32 @@ const Form = () => {
         dispatch({
             type: "SET",
             payload: {
-            name: "",
-            phone: "",
-            editing: false
+                name: "",
+                phone: "",
         }});
         changePage("/");
     }
 
     function changePage(path){
         history.push(path);
-    }
-
-    const submitEditHandler = () => { 
-
-        changePage("/");
     };
 
     const submitHandler = () => {
         dispatch({
             type: "CREATE",
             payload: {
-            name: form.name,
-            phone: form.phone,
-        }});
+                name: form.name,
+                phone: form.phone,
+            }
+        });
 
         dispatch({
             type: "SET",
             payload: {
-            name: "",
-            phone: "",
-            editing: false
-        }});
+                name: "",
+                phone: "",
+            }
+        });
         
     };
     

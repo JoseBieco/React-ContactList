@@ -18,7 +18,7 @@ const TableNav = () => {
     }
 
     const deletHandler = () => {
-       const delContacts = contacts.filter((contact) => contact.checked !== false)
+       const delContacts = contacts.filter((contact) => contact.checked === true)
         
         delContacts.map(delContact => {
             dispatch({
@@ -33,19 +33,20 @@ const TableNav = () => {
     }
 
     const editHandle = () => {
-       var list = contacts.filter((contact) => contact.checked !== false);
+        var list = contacts.filter((contact) => contact.checked === true);
 
-       if(list.length > 1){
-           alert("You can just edit one contact!");
-       }else if(list.length === 0){
+        if(list.length > 1){
+            alert("You can just edit one contact!");
+        }else if(list.length <= 0){
             alert("No contact selected");
-       }else{
-           dispatch({
-                type: "SET",
-                payload: list[0]
-            });
+        }else{
+            //    dispatch({
+            //         type: "SET",
+            //         payload: list[0]
+            //     });
+            console.log(list);
 
-           changePage("/contact");
+           //changePage("/contact");
        }
     }
 

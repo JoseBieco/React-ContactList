@@ -6,25 +6,25 @@ const FormTextInput = ( { inputName, inputPhone } ) => {
     const dispatch = useDispatch(state => state.form);
 
     const nameHandler = (e) => {
-        // setInputName(e.target.value);
+
         dispatch({
             type: "SET",
             payload: {
-            name: e.target.value,
-            phone: inputPhone,
-            editing: false
-        }});
+                name: e.target.value,
+                phone: inputPhone,
+            }
+        });
     };
 
     const phoneHandler = (e) => {
-        // setInputPhone(e.target.value);
+   
         dispatch({
             type: "SET",
             payload: {
-            name: inputName,
-            phone: e.target.value,
-            editing: false
-        }});
+                name: inputName,
+                phone: e.target.value,
+            }
+        });
     };
 
     return(

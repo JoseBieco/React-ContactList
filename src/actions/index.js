@@ -18,3 +18,12 @@ export const editContact = (contact) => {
         payload: contact
     }
 }
+
+//FORM
+
+// export const setForm = (form) => {
+//     return {
+//         type: "SET",
+//         payload: form
+//     }
+// }

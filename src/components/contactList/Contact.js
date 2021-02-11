@@ -1,23 +1,22 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-const Contact = ( props ) => {
+const Contact = ( { contactId } ) => {
 
     const contacts = useSelector(state => state.contacts);
     const dispatch = useDispatch();
 
-    const thisConatact = contacts.filter(contact => contact.id === props.contactId)[0];
+    const thisConatact = contacts.filter(contact => contact.id === contactId)[0];
 
     const checkedHandle = () => {
-        dispatch(contacts.map((contact) => {
-            if(contact.id === props.contactId){
-                return {
-                    type: "EDIT",
-                    payload: thisConatact
-                }
-            }
-            return contact;
-        }))
+        const editContact = contacts.filter((contact) => contact.id === contactId)[0];
+        
+
+        dispatch({
+            type: "EDIT",
+            payload: editContact
+        })
+        
     }
 
     return(

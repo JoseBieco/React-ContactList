@@ -8,14 +8,6 @@ import { useSelector } from "react-redux";
 function App() {
 
   const contacts = useSelector((state) => state.contacts)
-
-  //const [contacts, setContacts] = useState([]);
-  
-  // TODO: Implementar ID nos contatos
-  /* IDEIA 
-      Fazer uns state para o path do pagina
-  */
-
   
 
   return (

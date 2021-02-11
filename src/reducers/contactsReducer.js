@@ -10,65 +10,35 @@ const contactsReducer = (state = [], action) => {
                     id: ++lastId,
                     name: action.payload.name,
                     phone: action.payload.phone,
-                    marcked: false,
-                    editing: false
+                    checked: false
                 }
             ];
 
         case "EDIT":
-            state.map(contact => {
-                if(contact.id === action.payload.id){
-                    return [
-                        {
-                            id: action.payload.id,
-                            name: action.payload.name,
-                            phone: action.payload.phone,
-                            marcked: !action.payload.marcked,
-                            editing: action.payload.edit
-                        }
-                    ]
+            return state.map((item) => {
+                if(item.id === action.payload.id){
+                    return {
+                        ...item,
+                        id: action.payload.id,
+                        name: action.payload.name,
+                        phone: action.payload.phone,
+                        checked: !action.payload.checked
+                    }
                 }
-                return contact
-            })
-            break;
+                return item;
+            });
 
 
         case "DELETE":
-            return [state.filter(contact => contact.id !== action.payload.id)];
+            return state.filter((item) => {
+                    if(item.id !== action.payload.id){
+                        return item;
+                    }
+                });
+            
 
         default:
             return state;
     }
 }
 export default contactsReducer;
-
-
-
-
-
-
-
-
-
-// const initialState = {
-//     contacts: [],
-//     contact: {}
-// }
-
-// const contactsReducer = (state = initialState, action) => {
-//     switch(action.type){
-//         case "CREATE":
-//             return console.log(state);
-
-//         case "DELETE":
-//             return console.log(state);
-
-//         case "EDIT":
-//             return console.log(state);
-
-//         default:
-//             return state;
-//     }
-// };
-
-// export default contactsReducer;
