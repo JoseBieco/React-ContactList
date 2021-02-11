@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-const FormTextInput = ( { inputName, inputPhone } ) => {
+const FormTextInput = ( { inputName, inputPhone, contactEditing, contactId } ) => {
 
     const dispatch = useDispatch(state => state.form);
 
@@ -10,8 +10,10 @@ const FormTextInput = ( { inputName, inputPhone } ) => {
         dispatch({
             type: "SET",
             payload: {
+                id: contactId,
                 name: e.target.value,
                 phone: inputPhone,
+                editing: contactEditing
             }
         });
     };
@@ -21,8 +23,10 @@ const FormTextInput = ( { inputName, inputPhone } ) => {
         dispatch({
             type: "SET",
             payload: {
+                id: contactId,
                 name: inputName,
                 phone: e.target.value,
+                editing: contactEditing
             }
         });
     };

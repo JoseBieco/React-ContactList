@@ -14,6 +14,14 @@ const TableNav = () => {
     }
 
     const newContactHandler = () => {
+        dispatch({
+            type: "SET",
+            payload: {
+                name: "",
+                phone: "",
+                editing: false
+            }
+        });
         changePage("/contact");
     }
 
@@ -40,13 +48,17 @@ const TableNav = () => {
         }else if(list.length <= 0){
             alert("No contact selected");
         }else{
-            //    dispatch({
-            //         type: "SET",
-            //         payload: list[0]
-            //     });
-            console.log(list);
+            dispatch({
+                type: "SET",
+                payload: {
+                    id: list[0].id,
+                    name: list[0].name,
+                    phone: list[0].phone,
+                    editing: true
+                }
+            });
 
-           //changePage("/contact");
+           changePage("/contact");
        }
     }
 

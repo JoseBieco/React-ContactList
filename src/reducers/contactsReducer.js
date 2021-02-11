@@ -34,6 +34,7 @@ const contactsReducer = (state = [], action) => {
                     if(item.id !== action.payload.id){
                         return item;
                     }
+                    return null;
                 });
             
 

@@ -20,8 +20,10 @@ const Form = () => {
         dispatch({
             type: "SET",
             payload: {
+                id: null,
                 name: "",
                 phone: "",
+                editing: false
         }});
         changePage("/");
     }
@@ -31,30 +33,45 @@ const Form = () => {
     };
 
     const submitHandler = () => {
-        dispatch({
-            type: "CREATE",
-            payload: {
-                name: form.name,
-                phone: form.phone,
-            }
-        });
+        if(form.editing === false){
+            dispatch({
+                type: "CREATE",
+                payload: {
+                    name: form.name,
+                    phone: form.phone,
+                }
+            });
+        }else {
+            dispatch({
+                type: "EDIT",
+                payload: {
+                    id: form.id,
+                    name: form.name,
+                    phone: form.phone,
+                    checked: false
+                }
+            });
+        }
 
         dispatch({
             type: "SET",
             payload: {
+                id: null,
                 name: "",
                 phone: "",
+                editing: false
             }
         });
-        
     };
-    
+
     return(
         <form onSubmit={formHandler} className="form">
             <div className="inputs">
                <FormTextInput  
                     inputName={form.name} 
                     inputPhone={form.phone}
+                    contactEditing={form.editing}
+                    contactId={form.id}
                 />
 
                 <div className="input-submit">
